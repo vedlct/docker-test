@@ -38,6 +38,12 @@ COPY . /var/www
 # Copy the existing application directory permissions to the working directory
 COPY --chown=www-data:www-data . /var/www
 
+# Set permissions for the storage and cache directories
+RUN chown -R www-data:www-data storage bootstrap/cache \
+    && chmod -R 775 storage bootstrap/cache
+
+
+
 # Change current user to www
 USER www-data
 
